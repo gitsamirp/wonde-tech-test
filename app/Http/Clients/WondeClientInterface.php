@@ -17,7 +17,7 @@ interface WondeClientInterface
      * @param array $params
      * @return mixed
      */
-    public function getAllStaff(string $schoolId, array $params = []);
+    public function getAllStaff(string $schoolId, array $params = []): mixed;
 
 
     /**

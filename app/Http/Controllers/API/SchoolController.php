@@ -27,7 +27,6 @@ class SchoolController extends Controller
     public function index(Request $request): JsonResponse
     {
         $params = [
-            'per_page' => 10,
             'page' => $request->input('currentPage', 1)
         ];
 

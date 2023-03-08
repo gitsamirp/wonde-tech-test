@@ -34,7 +34,7 @@ class WondeClient implements WondeClientInterface
         }
     }
 
-    public function getAllStaff(string $schoolId, array $params = [])
+    public function getAllStaff(string $schoolId, array $params = []): mixed
     {
         $cacheKey = array_merge($params, ['schoolId' => $schoolId]);
         $cacheKey = 'all_staff.' . http_build_query($cacheKey, '', ',');
@@ -67,9 +67,9 @@ class WondeClient implements WondeClientInterface
 
         try {
             $school = $this->getSchool($schoolId);
-            $employees = $school->employees->get($employeeId, ['classes']);
-            Cache::put($cacheKey, $employees, 600);
-            return $employees;
+            $employeeClasses = $school->employees->get($employeeId, ['classes']);
+            Cache::put($cacheKey, $employeeClasses, 600);
+            return $employeeClasses;
         } catch (Exception $e) {
             report($e);
 
