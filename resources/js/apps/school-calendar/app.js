@@ -39,8 +39,11 @@ const store = createStore({
         },
     },
     actions: {
-        getEmployees({ commit }) {
-            fetch('/api/v1/employees')
+        getEmployees({ commit }, currentPage = 1) {
+            const params = new URLSearchParams(window.location.search);
+            params.set('currentPage', currentPage.toString());
+
+            fetch(`/api/v1/employees?${params}`)
                 .then((res) => res.json())
                 .then((body) => {
                     const { employees } = body;

@@ -18,6 +18,25 @@
             </tr>
         </tbody>
     </table>
+    <nav aria-label="...">
+        <ul class="pagination">
+            <li
+                class="page-item"
+                :class="{ 'disabled' : currentPage === 1 }"
+                @click="previousPage"
+            >
+                <a class="page-link">Previous</a>
+            </li>
+            <li class="page-item">
+                <a
+                    class="page-link"
+                    href="#"
+                    :class="{ 'disabled' : hasMorePages === false }"
+                    @click="nextPage"
+                >Next</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 </template>
 
@@ -26,11 +45,19 @@ import {mapActions, mapState} from "vuex";
 
 export default {
     name: 'EmployeeTable',
+    data() {
+        return {
+            currentPage: 1,
+            perPage: 10,
+        };
+    },
     computed: {
         ...mapState([
             'employees',
-            'employeeSelected',
         ]),
+        hasMorePages() {
+            return this.employees.length === this.perPage;
+        }
     },
     methods: {
         ...mapActions([
@@ -40,6 +67,21 @@ export default {
         selectEmployee(employeeId) {
             this.getEmployeesClasses(employeeId);
         },
+        previousPage() {
+            if (this.currentPage === 1) {
+                return false;
+            }
+
+            this.currentPage -= 1;
+            this.getEmployees(this.currentPage);
+        },
+        nextPage() {
+            if (this.hasMorePages === false) {
+                return false;
+            }
+            this.currentPage += 1;
+            this.getEmployees(this.currentPage);
+        }
     },
 }
 </script>
