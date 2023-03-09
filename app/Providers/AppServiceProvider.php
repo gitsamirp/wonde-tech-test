@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Http\Clients\WondeClient;
-use App\Http\Clients\WondeClientInterface;
+use App\Clients\WondeClient;
+use App\Clients\WondeClientInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

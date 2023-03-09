@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Clients\WondeClientInterface;
-use Illuminate\Http\Request;
+use App\Clients\WondeClientInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Wonde\Exceptions\InvalidTokenException;
 
@@ -14,6 +14,10 @@ class SchoolController extends Controller
      * @var string
      */
     private string $schoolId = 'A1930499544';
+
+    /**
+     * @var WondeClientInterface
+     */
     private WondeClientInterface $wondeClient;
 
     public function __construct(WondeClientInterface $wondeClient)

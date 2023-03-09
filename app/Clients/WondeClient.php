@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Clients;
+namespace App\Clients;
 
 use Exception;
+use Illuminate\Support\Facades\Cache;
 use Wonde\Client;
 use Wonde\Endpoints\Schools;
 use Wonde\Exceptions\InvalidTokenException;
-use Illuminate\Support\Facades\Cache;
 
 class WondeClient implements WondeClientInterface
 {
@@ -46,7 +46,7 @@ class WondeClient implements WondeClientInterface
         try {
             $school = $this->getSchool($schoolId);
             $employees = $school->employees->all([], $params);
-            Cache::put($cacheKey, $employees, 600);
+            Cache::put($cacheKey, $employees, 60);
             return $employees;
         } catch (Exception $e) {
             report($e);
@@ -68,7 +68,7 @@ class WondeClient implements WondeClientInterface
         try {
             $school = $this->getSchool($schoolId);
             $employeeClasses = $school->employees->get($employeeId, ['classes']);
-            Cache::put($cacheKey, $employeeClasses, 600);
+            Cache::put($cacheKey, $employeeClasses, 60);
             return $employeeClasses;
         } catch (Exception $e) {
             report($e);
@@ -90,7 +90,7 @@ class WondeClient implements WondeClientInterface
         try {
             $school = $this->getSchool($schoolId);
             $classes = $school->classes->get($classId, ['students', 'lessons']);
-            Cache::put($cacheKey, $classes, 600);
+            Cache::put($cacheKey, $classes, 60);
             return $classes;
         } catch (Exception $e) {
             report($e);
