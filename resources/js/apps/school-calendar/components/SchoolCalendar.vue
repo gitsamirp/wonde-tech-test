@@ -35,7 +35,6 @@ export default {
     },
     computed: {
         ...mapState([
-            'employees',
             'employeeSelected',
             'classSelected',
         ]),
@@ -54,8 +53,8 @@ export default {
             'getEmployees',
         ]),
     },
-    mounted() {
-        this.getEmployees();
+    async mounted() {
+        await this.getEmployees();
     },
 }
 </script>

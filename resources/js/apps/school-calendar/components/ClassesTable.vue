@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import {mapActions, mapState} from "vuex";
+import { mapActions, mapState } from "vuex";
 
     export default {
         name: 'ClassesTable',
@@ -35,8 +35,8 @@ import {mapActions, mapState} from "vuex";
             ...mapActions([
                 'getClassData'
             ]),
-            selectClass(classId) {
-                this.getClassData(classId);
+            async selectClass(classId) {
+                await this.getClassData(classId);
             },
         },
     }

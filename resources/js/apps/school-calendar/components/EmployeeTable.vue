@@ -57,31 +57,32 @@ export default {
         ]),
         hasMorePages() {
             return this.employees.length === this.perPage;
-        }
+        },
     },
     methods: {
         ...mapActions([
             'getEmployees',
             'getEmployeesClasses'
         ]),
-        selectEmployee(employeeId) {
-            this.getEmployeesClasses(employeeId);
+        async selectEmployee(employeeId) {
+            await this.getEmployeesClasses(employeeId);
         },
-        previousPage() {
+        async previousPage() {
             if (this.currentPage === 1) {
                 return false;
             }
 
             this.currentPage -= 1;
-            this.getEmployees(this.currentPage);
+            await this.getEmployees(this.currentPage);
         },
-        nextPage() {
+        async nextPage() {
             if (this.hasMorePages === false) {
                 return false;
             }
+
             this.currentPage += 1;
-            this.getEmployees(this.currentPage);
-        }
+            await this.getEmployees(this.currentPage);
+        },
     },
 }
 </script>

@@ -39,11 +39,10 @@ const store = createStore({
         },
     },
     actions: {
-        getEmployees({ commit }, currentPage = 1) {
+        async getEmployees({ commit }, currentPage = 1) {
             const params = new URLSearchParams(window.location.search);
             params.set('currentPage', currentPage.toString());
-
-            fetch(`/api/v1/employees?${params}`)
+            await fetch(`/api/v1/employees?${params}`)
                 .then((res) => res.json())
                 .then((body) => {
                     const { employees } = body;
@@ -52,8 +51,8 @@ const store = createStore({
                     console.error(err)
                 });
         },
-        getEmployeesClasses({ commit }, employeeId) {
-            fetch(`/api/v1/employee/${employeeId}/classes`)
+        async getEmployeesClasses({ commit }, employeeId) {
+            await fetch(`/api/v1/employee/${employeeId}/classes`)
                 .then((res) => res.json())
                 .then((body) => {
                     commit('setClasses', body);
@@ -61,8 +60,8 @@ const store = createStore({
                     console.error(err)
                 });
         },
-        getClassData({ commit }, classId) {
-            fetch(`/api/v1/class/${classId}`)
+        async getClassData({ commit }, classId) {
+            await fetch(`/api/v1/class/${classId}`)
                 .then((res) => res.json())
                 .then((body) => {
                     commit('setClassSelected', body);

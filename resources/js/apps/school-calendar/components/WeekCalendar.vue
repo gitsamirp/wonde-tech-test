@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import {mapActions, mapState} from "vuex";
+import { mapState } from "vuex";
 import moment from "moment";
 
     export default {
@@ -52,8 +52,6 @@ import moment from "moment";
             ]),
         },
         methods: {
-            ...mapActions([
-            ]),
             getLessonsForDayOfWeek(day) {
                 const weekStart = moment().startOf('week').startOf('day');
                 weekStart.add(day, 'day');

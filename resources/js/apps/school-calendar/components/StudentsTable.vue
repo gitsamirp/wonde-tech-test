@@ -16,17 +16,13 @@
 </template>
 
 <script>
-import {mapActions, mapState} from "vuex";
+import { mapState} from "vuex";
 
     export default {
         name: 'StudentsTable',
         computed: {
             ...mapState([
                 'classStudents',
-            ]),
-        },
-        methods: {
-            ...mapActions([
             ]),
         },
     }
